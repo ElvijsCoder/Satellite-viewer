@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SATELLITE PROXIMITY TRACKER // SYSTEM ONLINE</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.141/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.141/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/cyberpunk.css" />
+  <link rel="stylesheet" href="styles/cesium-dark.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Mode Switcher -->
+    <div class="mode-switcher">
+      <button class="mode-btn" data-mode="2d">2D MAP</button>
+      <button class="mode-btn active" data-mode="3d">3D GLOBE</button>
+      <button class="mode-btn iss-mode" data-mode="iss">ISS TRACK</button>
+    </div>
+
+    <!-- 2D Map -->
+    <div id="map-container" class="view-container">
+      <div id="map"></div>
+    </div>
+
+    <!-- 3D Globe -->
+    <div id="cesium-container" class="view-container active">
+      <div id="cesiumContainer"></div>
+    </div>
+
+    <!-- ISS Mode -->
+    <div id="iss-container" class="view-container">
+      <div id="iss-cesiumContainer"></div>
+      <div class="iss-hud">
+        <div class="iss-live-feed">
+          <h3>ISS HD LIVE FEED</h3>
+          <button id="iss-video-btn" class="cyber-btn">OPEN LIVE FEED</button>
+        </div>
+        <div class="iss-stats">
+          <h3>ISS TELEMETRY</h3>
+          <div id="iss-telemetry"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUDs -->
+    <div id="closest-sat" class="hud-panel">
+      <div class="panel-header"><span class="blink">●</span> CLOSEST SATELLITE</div>
+      <div class="panel-content">
+        <div class="no-satellite"><span class="blink">/// INITIALIZING SYSTEM ///</span></div>
+      </div>
+    </div>
+
+    <div id="pass-predictions" class="hud-panel">
+      <div class="panel-header">UPCOMING PASSES</div>
+      <div class="panel-content" id="pass-list">
+        <div class="loading">CALCULATING ORBITS...</div>
+      </div>
+    </div>
+
+    <div id="sat-list" class="hud-panel">
+      <div class="panel-header">TRACKED SATELLITES</div>
+      <div class="panel-content" id="tracked-sats">
+        <div class="loading">LOADING TLE DATA...</div>
+      </div>
+    </div>
+
+    <div class="hud-panel status-bar">
+      <div class="status-grid">
+        <div class="status-item">
+          <span class="status-label">LOC</span>
+          <span id="loc-status" class="status-value">ACQUIRING...</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">SAT</span>
+          <span id="sat-count" class="status-value">0</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">VISIBLE</span>
+          <span id="visible-count" class="status-value">0</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">NEXT PASS</span>
+          <span id="next-pass-time" class="status-value">--:--</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud-panel notification-panel">
+      <label class="toggle-switch">
+        <input type="checkbox" id="notify-toggle" />
+        <span class="toggle-slider"></span>
+        <span class="toggle-label">ALERTS</span>
+      </label>
+    </div>
+
+    <div class="hud-panel audio-panel">
+      <button id="audio-toggle" class="cyber-btn small">🔊</button>
+      <input type="range" id="volume-slider" min="0" max="100" value="50" />
+    </div>
+
+    <!-- Location Overlay (desktop uses IP + manual) -->
+    <div id="loc-request" class="overlay hidden">
+      <div class="overlay-content">
+        <h2 class="glitch-text">LOCATION REQUIRED</h2>
+        <p>Enter coordinates manually or use IP-based approximate location.</p>
+        <div class="loc-inputs">
+          <input id="manual-lat" type="number" step="0.0001" placeholder="Latitude" />
+          <input id="manual-lon" type="number" step="0.0001" placeholder="Longitude" />
+        </div>
+        <button id="grant-loc" class="cyber-btn">USE MANUAL</button>
+        <button id="auto-loc" class="cyber-btn small">AUTO (IP)</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.1.4/satellite.min.js"></script>
+
+  <script src="renderer/audioEngine.js"></script>
+  <script src="renderer/satelliteEngine.js"></script>
+  <script src="renderer/locationService.js"></script>
+  <script src="renderer/passPredictor.js"></script>
+  <script src="renderer/notificationService.js"></script>
+  <script src="renderer/cesiumView.js"></script>
+  <script src="renderer/issTracker.js"></script>
+  <script src="renderer/uiController.js"></script>
+  <script src="renderer/app.js"></script>
+</body>
+</html>

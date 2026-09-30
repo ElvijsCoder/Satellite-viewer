@@ -1,0 +1,30 @@
+.loc-inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.loc-inputs input {
+  background: rgba(0, 240, 255, 0.05);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: 'Share Tech Mono', monospace;
+  padding: 10px;
+  width: 140px;
+  outline: none;
+}
+.loc-inputs input:focus {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+/* Full-screen globe fixes */
+#cesiumContainer, #iss-cesiumContainer {
+  width: 100%;
+  height: 100%;
+}
+
+/* ISS Live Feed button area */
+.iss-live-feed .cyber-btn {
+  width: 100%;
+  margin-top: 10px;
+}

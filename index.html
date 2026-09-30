@@ -5,33 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SATELLITE PROXIMITY TRACKER // SYSTEM ONLINE</title>
 
+  <!-- Leaflet & Cesium -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://cesium.com/downloads/cesiumjs/releases/1.141/Build/Cesium/Cesium.js"></script>
   <link href="https://cesium.com/downloads/cesiumjs/releases/1.141/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- YOUR CSS FILES -->
   <link rel="stylesheet" href="styles/cyberpunk.css" />
   <link rel="stylesheet" href="styles/cesium-dark.css" />
 </head>
 <body>
   <div id="app">
-    <!-- Mode Switcher -->
     <div class="mode-switcher">
       <button class="mode-btn" data-mode="2d">2D MAP</button>
       <button class="mode-btn active" data-mode="3d">3D GLOBE</button>
       <button class="mode-btn iss-mode" data-mode="iss">ISS TRACK</button>
     </div>
 
-    <!-- 2D Map -->
     <div id="map-container" class="view-container">
       <div id="map"></div>
     </div>
 
-    <!-- 3D Globe -->
     <div id="cesium-container" class="view-container active">
       <div id="cesiumContainer"></div>
     </div>
 
-    <!-- ISS Mode -->
     <div id="iss-container" class="view-container">
       <div id="iss-cesiumContainer"></div>
       <div class="iss-hud">
@@ -46,7 +47,6 @@
       </div>
     </div>
 
-    <!-- HUDs -->
     <div id="closest-sat" class="hud-panel">
       <div class="panel-header"><span class="blink">●</span> CLOSEST SATELLITE</div>
       <div class="panel-content">
@@ -102,8 +102,7 @@
       <input type="range" id="volume-slider" min="0" max="100" value="50" />
     </div>
 
-    <!-- Location Overlay (desktop uses IP + manual) -->
-    <div id="loc-request" class="overlay hidden">
+    <div id="loc-request" class="overlay">
       <div class="overlay-content">
         <h2 class="glitch-text">LOCATION REQUIRED</h2>
         <p>Enter coordinates manually or use IP-based approximate location.</p>
